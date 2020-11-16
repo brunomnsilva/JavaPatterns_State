@@ -1,10 +1,7 @@
 package pt.pa;
 
-import pt.pa.model.MusicPlayer;
-import pt.pa.model.Playlist;
-import pt.pa.model.Song;
+import pt.pa.model.player.MusicPlayer;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -13,9 +10,7 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-
         MusicPlayer player = new MusicPlayer("songs");
-        //player.play();
 
         Thread t = new Thread(new CLI(player));
         t.run();
@@ -23,6 +18,7 @@ public class Main {
 
     public static class CLI implements Runnable {
 
+        /** player to control */
         private MusicPlayer player;
 
         public CLI(MusicPlayer player) {
@@ -35,16 +31,25 @@ public class Main {
             Scanner keyboard = new Scanner(System.in);
             String command;
             while(isRunning) {
-                System.out.println("Available commands: PLAY, STOP, QUIT");
+                System.out.println("Available commands: PLAY, STOP, NEXT, PREV, STATUS, QUIT");
                 System.out.print("Prompt> ");
                 command = keyboard.nextLine().toLowerCase();
 
                 switch (command) {
                     case "play":
-                        player.play();
+                        player.playPause();
                         break;
                     case "stop":
                         player.stop();
+                        break;
+                    case "next":
+                        player.next();
+                        break;
+                    case "prev":
+                        player.prev();
+                        break;
+                    case "status":
+                        System.out.println(player.status());
                         break;
                     case "quit":
                         isRunning = false;
@@ -54,6 +59,8 @@ public class Main {
                 }
             }
             System.out.println("[Terminated]");
+            if(player.isPlaying()) player.stop();
+            System.exit(0);
         }
     }
 }
