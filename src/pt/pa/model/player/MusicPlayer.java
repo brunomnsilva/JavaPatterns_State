@@ -110,7 +110,6 @@ public class MusicPlayer {
 
     /* Internal utilities */
     public static String timeToHuman(Time t) {
-        System.out.println("SECONDS = " + t.getSeconds());
         int totalSeconds = (int)t.getSeconds();
         int minutes = totalSeconds / 60;
         int seconds = totalSeconds % 60;

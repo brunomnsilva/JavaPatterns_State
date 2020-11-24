@@ -31,6 +31,9 @@ public class Main {
             Scanner keyboard = new Scanner(System.in);
             String command;
             while(isRunning) {
+                System.out.println("------- CURRENT STATUS -------");
+                System.out.println(player.status());
+                System.out.println("------------------------------");
                 System.out.println("Available commands: PLAY, STOP, NEXT, PREV, STATUS, QUIT");
                 System.out.print("Prompt> ");
                 command = keyboard.nextLine().toLowerCase();
