@@ -1,6 +1,6 @@
-package pt.pa.model.player;
+package com.brunomnsilva.model.player;
 
-import pt.pa.model.Song;
+import com.brunomnsilva.model.Song;
 
 public class StoppedState extends MusicPlayerState {
 

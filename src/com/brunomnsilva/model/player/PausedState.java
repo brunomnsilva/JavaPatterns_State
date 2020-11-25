@@ -1,4 +1,4 @@
-package pt.pa.model.player;
+package com.brunomnsilva.model.player;
 
 import javax.media.Time;
 

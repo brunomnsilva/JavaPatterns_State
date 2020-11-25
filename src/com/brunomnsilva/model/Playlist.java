@@ -1,4 +1,4 @@
-package pt.pa.model;
+package com.brunomnsilva.model;
 
 import java.io.File;
 import java.io.FilenameFilter;
