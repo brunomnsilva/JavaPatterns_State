@@ -31,3 +31,9 @@ Run the program and check that, indeed, it behaves accordingly to the diagram ab
 ## Exercises
 
 1. 
+
+![](images/fsm_2.png)
+
+2. 
+
+![](images/fsm_3.png)
