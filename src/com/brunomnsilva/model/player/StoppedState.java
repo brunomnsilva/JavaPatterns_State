@@ -9,7 +9,7 @@ public class StoppedState extends MusicPlayerState {
     }
 
     @Override
-    public void playPause() {
+    public void play() {
         player.initPlayer(player.getPlaylist().getCurrent());
         player.startPlayback();
         player.changeState(new PlayingState(player));

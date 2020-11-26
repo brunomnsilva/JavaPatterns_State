@@ -8,9 +8,8 @@ public class PlayingState extends MusicPlayerState {
     }
 
     @Override
-    public void playPause() {
-        player.stopPlayback();
-        player.changeState(new PausedState(player));
+    public void play() {
+        //do nothing
     }
 
     @Override

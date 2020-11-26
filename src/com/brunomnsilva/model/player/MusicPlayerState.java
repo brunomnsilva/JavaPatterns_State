@@ -8,7 +8,7 @@ public abstract class MusicPlayerState {
         this.player = player;
     }
 
-    public abstract void playPause();
+    public abstract void play();
     public abstract void stop();
     public abstract void next();
     public abstract void prev();

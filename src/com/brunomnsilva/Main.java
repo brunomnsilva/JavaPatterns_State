@@ -40,7 +40,7 @@ public class Main {
 
                 switch (command) {
                     case "play":
-                        player.playPause();
+                        player.play();
                         break;
                     case "stop":
                         player.stop();

@@ -27,8 +27,8 @@ public class MusicPlayer {
     Public interface of Music Player. Delegate commands to current state
      */
 
-    public void playPause() {
-        state.playPause();
+    public void play() {
+        state.play();
     }
 
     public void stop() {
