@@ -123,5 +123,7 @@ besides implementing `PausedState`. The class `MusicPlayer` remains unchanged.
     }
     ```
    
-2. TODO. Fork project and provide a "pull request" with the solution in this file.
+2. TODO, accepting contribution.
+ 
+    :bulb: Fork project and provide a "pull request" with the solution in this file.
 
