@@ -9,7 +9,7 @@ besides implementing `PausedState`. The class `MusicPlayer` remains unchanged.
         }
     
         @Override
-        public void playPause() {
+        public void play() {
             player.startPlayback();
             player.changeState(new PlayingState(player));
         }
@@ -49,7 +49,7 @@ besides implementing `PausedState`. The class `MusicPlayer` remains unchanged.
         }
     
         @Override
-        public void playPause() {
+        public void play() {
             player.stopPlayback();
             player.changeState(new PausedState(player));
         }
@@ -91,7 +91,7 @@ besides implementing `PausedState`. The class `MusicPlayer` remains unchanged.
         }
     
         @Override
-        public void playPause() {
+        public void play() {
             player.initPlayer(player.getPlaylist().getCurrent());
             player.startPlayback();
             player.changeState(new PlayingState(player));
@@ -124,6 +124,7 @@ besides implementing `PausedState`. The class `MusicPlayer` remains unchanged.
     ```
    
 2. Neste caso todas as classes sofreram alterações dado que foram adicionados: um novo estado, e novos métodos, refletindo o comportamento da MusicPlayer para o novo estado.
+    
     ```java
     public abstract class MusicPlayerState {
 
