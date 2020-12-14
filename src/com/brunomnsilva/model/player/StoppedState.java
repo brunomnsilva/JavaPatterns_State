@@ -30,7 +30,7 @@ public class StoppedState extends MusicPlayerState {
     @Override
     public void prev() {
         //load previous song. Keep state.
-        Song prev = player.getPlaylist().getNext();
+        Song prev = player.getPlaylist().getPrevious();
         player.initPlayer(prev);
     }
 
