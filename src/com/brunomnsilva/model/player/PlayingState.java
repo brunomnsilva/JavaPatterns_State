@@ -15,7 +15,6 @@ public class PlayingState extends MusicPlayerState {
     @Override
     public void stop() {
         player.stopPlayback();
-        player.disposePlayer();
         player.changeState(new StoppedState(player));
     }
 
@@ -36,6 +35,6 @@ public class PlayingState extends MusicPlayerState {
         return String.format("Playing (%s / %s) %s",
                 MusicPlayer.timeToHuman(current),
                 MusicPlayer.timeToHuman(total),
-                player.getPlaylist().getCurrent().toString());
+                player.getCurrentLoadedSong());
     }
 }

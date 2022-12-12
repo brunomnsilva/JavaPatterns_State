@@ -23,51 +23,152 @@ public class MusicPlayer {
         }
     }
 
-    /*
-    Public interface of Music Player. Delegate commands to current state
+    /**
+     * Action for play command.
      */
-
     public void play() {
         state.play();
     }
 
+    /**
+     * Action for stop command.
+     */
     public void stop() {
         state.stop();
     }
 
+    /**
+     * Action for next command.
+     */
     public void next() {
         state.next();
     }
 
+    /**
+     * Action for prev command.
+     */
     public void prev() {
         state.prev();
     }
 
+    /**
+     * Returns a string with the player status.
+     * @return the player status
+     */
     public String status() {
         return state.status();
     }
 
+    /**
+     * Checks if the player is playing a song.
+     * @return true if playing; false, otherwise.
+     */
     public boolean isPlaying() {
         return state instanceof PlayingState;
     }
 
-    /*
-    Protected methods of player. Exposed to in-package classes
-     */
-
     /**
      * Change state method.
-     * @param s state to transition to
+     * @param s state to transition to.
      */
-    protected void changeState(MusicPlayerState s) {
+    public void changeState(MusicPlayerState s) {
         this.state = s;
     }
 
-    protected Playlist getPlaylist() {
+    /**
+     * Returns the underlying loaded playlist.
+     * @return the playlist.
+     */
+    private Playlist getPlaylist() {
         return playlist;
     }
 
-    protected void initPlayer(Song song) {
+    /**
+     * Returns a string with the current loaded song in the player.
+     * @return song information.
+     */
+    public String getCurrentLoadedSong() {
+        return playlist.getCurrent().toString();
+    }
+
+    /**
+     * Loads into the player the current song from the playlist.
+     */
+    public void loadCurrentSong() {
+        initPlayer(getPlaylist().getCurrent());
+    }
+
+    /**
+     * Loads into the player the next song from the playlist.
+     */
+    public void loadNextSong() {
+        initPlayer(getPlaylist().getNext());
+    }
+
+    /**
+     * Loads into the player the previous song from the playlist.
+     */
+    public void loadPreviousSong() {
+        initPlayer(getPlaylist().getPrevious());
+    }
+
+    /**
+     * Starts playback of the current loaded song.
+     */
+    public void startPlayback() {
+        javaMediaPlayer.start();
+    }
+
+    /**
+     * Pauses playback. Keeps the song in the player.
+     */
+    public void pausePlayback() {
+        javaMediaPlayer.stop();
+    }
+
+    /**
+     * Stops playback and unloads the current song.
+     */
+    public void stopPlayback() {
+        javaMediaPlayer.stop();
+        disposePlayer();
+    }
+
+    /**
+     * Skips 10 seconds of playback.
+     */
+    public void skip10seconds() {
+        Time mediaTime = javaMediaPlayer.getMediaTime();
+        Time skipTime = new Time(mediaTime.getSeconds() + 10);
+        javaMediaPlayer.setMediaTime(skipTime);
+    }
+
+    /**
+     * Rewinds 10 seconds of playback.
+     */
+    public void rewind10seconds() {
+        Time mediaTime = javaMediaPlayer.getMediaTime();
+        Time skipTime = new Time(mediaTime.getSeconds() - 10);
+        javaMediaPlayer.setMediaTime(skipTime);
+    }
+
+    /**
+     * Returns play time of the current song.
+     * @return song play time
+     */
+    public Time getMediaTime() {
+        return javaMediaPlayer.getMediaTime();
+    }
+
+    /**
+     * Returns duration of the current song.
+     * @return song duration
+     */
+    public Time getDuration() {
+        return javaMediaPlayer.getDuration();
+    }
+
+    private void initPlayer(Song song) {
         try {
             javaMediaPlayer = Manager.createRealizedPlayer(playlist.getCurrent().getUnderlyingFile().toURI().toURL());
         } catch (IOException | CannotRealizeException | NoPlayerException e) {
@@ -75,37 +176,10 @@ public class MusicPlayer {
         }
     }
 
-    protected void disposePlayer() {
+    private void disposePlayer() {
         javaMediaPlayer.stop();
         javaMediaPlayer.close();
-    }
-
-    protected void startPlayback() {
-        javaMediaPlayer.start();
-    }
-
-    protected void stopPlayback() {
-        javaMediaPlayer.stop();
-    }
-
-    protected void skip10seconds() {
-        Time mediaTime = javaMediaPlayer.getMediaTime();
-        Time skipTime = new Time(mediaTime.getSeconds() + 10);
-        javaMediaPlayer.setMediaTime(skipTime);
-    }
-
-    protected void rewind10seconds() {
-        Time mediaTime = javaMediaPlayer.getMediaTime();
-        Time skipTime = new Time(mediaTime.getSeconds() - 10);
-        javaMediaPlayer.setMediaTime(skipTime);
-    }
-
-    protected Time getMediaTime() {
-        return javaMediaPlayer.getMediaTime();
-    }
-
-    protected Time getDuration() {
-        return javaMediaPlayer.getDuration();
+        javaMediaPlayer = null;
     }
 
     /* Internal utilities */

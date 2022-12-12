@@ -1,7 +1,5 @@
 package com.brunomnsilva.model.player;
 
-import com.brunomnsilva.model.Song;
-
 public class StoppedState extends MusicPlayerState {
 
     public StoppedState(MusicPlayer player) {
@@ -10,7 +8,7 @@ public class StoppedState extends MusicPlayerState {
 
     @Override
     public void play() {
-        player.initPlayer(player.getPlaylist().getCurrent());
+        player.loadCurrentSong();
         player.startPlayback();
         player.changeState(new PlayingState(player));
     }
@@ -23,19 +21,17 @@ public class StoppedState extends MusicPlayerState {
     @Override
     public void next() {
         //load next song. Keep state.
-        Song next = player.getPlaylist().getNext();
-        player.initPlayer(next);
+        player.loadNextSong();
     }
 
     @Override
     public void prev() {
         //load previous song. Keep state.
-        Song prev = player.getPlaylist().getPrevious();
-        player.initPlayer(prev);
+        player.loadPreviousSong();
     }
 
     @Override
     public String status() {
-        return "Stopped. Deck contains " + player.getPlaylist().getCurrent().toString();
+        return "Stopped. Deck contains " + player.getCurrentLoadedSong();
     }
 }
